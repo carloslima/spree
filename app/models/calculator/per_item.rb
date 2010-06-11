@@ -13,6 +13,7 @@ class Calculator::PerItem < Calculator
   end
 
   def compute(object=nil)
-    self.preferred_amount * object.length
+    items_count = object.inject(0) {|count, line_item| count + line_item.quantity }
+    self.preferred_amount * items_count
   end
 end
