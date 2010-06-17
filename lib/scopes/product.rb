@@ -44,9 +44,9 @@ module Scopes::Product
     Product.not_deleted.available(args.first).scope(:find)
   }
 
-  ::Product.scope :not_deleted, { where("products.deleted_at is null") }
+  ::Product.scope :not_deleted, Product.where("products.deleted_at is null")
   ::Product.scope :available,   lambda { |*args|
-     where("products.available_on <= ?", args.first || Time.zone.now)
+     Product.where("products.available_on <= ?", args.first || Time.zone.now)
   }
 
   ::Product.scope :keywords, lambda{|query|
