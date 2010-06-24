@@ -202,7 +202,7 @@ Spree::Application.routes.draw do |map|
   #match '/:controller(/:action(/:id(.:format)))'
 
   #RAILS3 ROOT - this is interfering with routes in other extensions - we need to make sure it loads after everything else (if possible)
-  # a catchall route for "static" content
-  #match '*path' => 'content#show'
+  # a catchall route for "static" content (except paths with explicit extensions: .html, .ico, etc)
+  match '/*path' => 'content#show', :constraints => { :fullpath => /^\/([^.]+)$/ }
 
 end
